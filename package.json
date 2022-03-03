@@ -5,7 +5,8 @@
   "main": "app.js",
   "scripts": {
     "test": "jest",
-    "dev": "nodemon start"
+    "dev": "nodemon start",
+    "start": "node start"
   },
   "author": "Naman Garg",
   "license": "ISC",
