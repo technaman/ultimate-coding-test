@@ -15,3 +15,4 @@
 ## Future Scope
 - Push the write updates on a queue to be consumed by a separate write service
 - We need high availability & low latency since this is a chat bot.
+- More tests, mock the external API, mock DB, etc.
