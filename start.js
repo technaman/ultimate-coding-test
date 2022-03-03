@@ -1,7 +1,6 @@
-const makeApp = require('./app');
-const db = require('./db');
-
+require('dotenv').config();
 const app = require('./app');
+const db = require('./db');
 
 (async()=> {
     try{    
