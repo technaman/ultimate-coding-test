@@ -1,7 +1,7 @@
 const makeApp = require('./app');
 const db = require('./db');
 
-const app = makeApp(db);
+const app = require('./app');
 
 (async()=> {
     try{    

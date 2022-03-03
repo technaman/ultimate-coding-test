@@ -1,6 +1,7 @@
 const axios = require("axios");
 const log = require('../util/logger');
 const API_URL = process.env.API_URL || 'https://chat.ultimate.ai/api/intents';
+
 const checkIntents = async (botId, message) => {
 
     if(!botId || !message) return null;
@@ -15,7 +16,8 @@ const checkIntents = async (botId, message) => {
         'Accept': 'application/json', 
         'authorization': process.env.API_KEY
     },
-    data : data
+    data : data,
+    timeout: process.env.EXTERNAL_API_TIMEOUT || 500
     };
 
     try {
@@ -25,7 +27,7 @@ const checkIntents = async (botId, message) => {
         return data;    
     } catch (e) {
         log.error(e);
-        return e;
+        throw e;
     }
 
 }

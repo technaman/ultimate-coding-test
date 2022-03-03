@@ -11,9 +11,11 @@ const replySchema = new mongoose.Schema({
     'description': {
         type: String
     },
-    'trainingData' : {
-        type: [messageSchema],
-        default: null
+    'trainingData' : {        
+        messages: {
+            type: [messageSchema],
+            default: []
+        }
     },
     'reply': {
         type: messageSchema    

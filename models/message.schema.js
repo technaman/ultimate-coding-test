@@ -2,13 +2,18 @@ const mongoose = require('mongoose');
 
 const messageSchema = new mongoose.Schema({
     'id': {
-        type: mongoose.Types.ObjectId,        
+        type: String
     },
     'text' : {
-        type: String,                
+        type: String,     
+        unique: true           
     }
 }, {
     versionKey: false
+});
+
+messageSchema.set('toJSON', {
+    virtuals: true
 });
 
 module.exports = messageSchema

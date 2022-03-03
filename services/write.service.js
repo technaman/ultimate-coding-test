@@ -2,17 +2,16 @@ const ReplyModel = require('../models/reply.model');
 const MessageModel = require('../models/message.model');
 const log = require('../util/logger');
 
-const updateTrainingData = async (replyModelId, message) => {
-    const model = ReplyModel.findById(replyModelId);
-    if(!model) {
-        console.error(`Couldn't find the reply model with id: ${replyModelId}`);
-        return;
+const updateTrainingData = async (name, message) => {
+    try {
+        const messageModel = await MessageModel.findOneAndUpdate({text: message}, {text: message}, {upsert: true, new: true}).lean();     
+        const replyset = await ReplyModel.findOne({name});
+        replyset.trainingData.messages.push(messageModel);
+        await replyset.save();
+        log.info(`Training data updated for name: ${name} and message: ${message}`);
+    } catch (e) {
+        log.error(`Couldn't update the training data for name: ${name} & message: ${message} Error:  ${e.message}`);
     }
-    const messageModel = await MessageModel.findOneAndUpdate({text: message}, {}, {upsert: true});
-
-    model.trainingData.push(messageModel);
-
-    await model.save();
 }
 
 const createNewReplyModel = async (name, message) => {
